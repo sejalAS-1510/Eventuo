@@ -12,6 +12,8 @@ const authLimiter = rateLimit({
   max: 10,
   standardHeaders: true,
   legacyHeaders: false,
+  // Skip entirely in test environment so Jest can fire many requests freely
+  skip: () => process.env.NODE_ENV === 'test',
   message: { success: false, message: 'Too many requests, please try again later' },
 });
 
